@@ -8,13 +8,14 @@ export class TimeoutService {
   handleInactivity() {
     return new Observable(observer => {
       let timeout;
-      const resetTimer = () => {
-        clearTimeout(timeout);
-        timeout = setTimeout(setInactive, 10000);
-      };
 
       const setInactive = () => {
         observer.next(true);
+      };
+
+      const resetTimer = () => {
+        clearTimeout(timeout);
+        timeout = setTimeout(setInactive, 10000);
       };
 
       // events - note: not tested for accessibility
