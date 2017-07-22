@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core'
-import { Observable } from 'rxjs/Observable'
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class TimeoutService {
@@ -7,22 +7,25 @@ export class TimeoutService {
 
   handleInactivity() {
     return new Observable(observer => {
-      let timeout
+      let timeout;
       const resetTimer = () => {
-        clearTimeout(timeout)
-        timeout = setTimeout(setInactive, 10000)
-      }
+        clearTimeout(timeout);
+        timeout = setTimeout(setInactive, 10000);
+      };
 
       const setInactive = () => {
-        observer.next(true)
-        observer.complete()
-      }
+        observer.next(true);
+        observer.complete();
+      };
 
-      window.onload = resetTimer
-      document.onmousemove = resetTimer
-      document.onmousedown = resetTimer
-      document.onkeydown = resetTimer
-      // TODO: add mobile events
-    })
+      // events - not tested for accessibility
+      window.onload = resetTimer;
+      document.onmousemove = resetTimer;
+      document.onmousedown = resetTimer;
+      document.onkeydown = resetTimer;
+      document.onscroll = resetTimer;
+      document.ontouchstart = resetTimer;
+      document.ontouchmove = resetTimer;
+    });
   }
 }
