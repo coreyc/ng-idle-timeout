@@ -7,7 +7,7 @@ export class TimeoutService {
 
   handleInactivity() {
     return new Observable(observer => {
-      let timeout: number;
+      let timeout;
       const resetTimer = () => {
         clearTimeout(timeout);
         timeout = setTimeout(setInactive, 10000);
