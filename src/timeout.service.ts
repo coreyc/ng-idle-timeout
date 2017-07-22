@@ -7,7 +7,7 @@ export class TimeoutService {
 
   handleInactivity() {
     return new Observable(observer => {
-      let timeout;
+      let timeout: number;
       const resetTimer = () => {
         clearTimeout(timeout);
         timeout = setTimeout(setInactive, 10000);
@@ -15,10 +15,9 @@ export class TimeoutService {
 
       const setInactive = () => {
         observer.next(true);
-        observer.complete();
       };
 
-      // events - not tested for accessibility
+      // events - note: not tested for accessibility
       window.onload = resetTimer;
       document.onmousemove = resetTimer;
       document.onmousedown = resetTimer;
