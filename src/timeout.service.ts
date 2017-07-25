@@ -3,6 +3,8 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class TimeoutService {
+  idleTime = 1200000;
+
   constructor() { }
 
   handleInactivity() {
@@ -15,7 +17,7 @@ export class TimeoutService {
 
       const resetTimer = () => {
         clearTimeout(timeout);
-        timeout = setTimeout(setInactive, 10000);
+        timeout = setTimeout(setInactive, this.idleTime);
       };
 
       // events - note: not tested for accessibility
@@ -27,5 +29,9 @@ export class TimeoutService {
       document.ontouchstart = resetTimer;
       document.ontouchmove = resetTimer;
     });
+  }
+
+  setIdleTime(idleTime: number) {
+    this.idleTime = idleTime;
   }
 }
